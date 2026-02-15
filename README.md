@@ -1,2 +1,4 @@
 # Learning-React-fromScratch
 Start Learning and Teaching using this files with two type, First is Normal React that we create using "npm create-react-app projectName" And Second is ViteReact "npm create vite@latest" that create same as React Project but that save so much time while creating project and etc...
+
+In this Repo Creating React App, And learn step by step from scretch!
