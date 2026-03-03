@@ -1,16 +1,56 @@
-# React + Vite
+# What is new in **Project**
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Variables, Arrays, Objects
+```javascript
+import { useState } from 'react'
+import './App.css'
+import './index.css' // into this added tailwindcss file
+import Card from './components/card'
 
-Currently, two official plugins are available:
+function App() {
+  let myObj = {
+    username: "Goku",
+    age: 23
+  }
+  let myArr = [1, 2, 3]
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+  return (
+    <>
+      <h1 className='bg-green-400 text-black p-4 rounded-xl'>TailwindProps!</h1>
+      <Card testchar="linkin Park" bio=" best english RIP Singer" year="2020"/> 
+      {/* <Card testchar="Goku" testObj={myObj} testArr={myArr}/>  */}
+      {/* we can add objects and arrays using {} */}
+      <Card testchar="Goku" bio=" Goku is a character of DB!"/> {/* it repeat full card automatically in UI or DOM Secound time */}
+      <Card testchar="Jinhoo" bio=" Jinhoo Sung is a character of Anime!" year="2026"/> 
+      {/* in this case a card file to create a card and using that file reference we can use multiple times! */}
+    </>
+  )
+}
 
-## React Compiler
+export default App
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Create new Component and inject using import/export
+```javascript
+import React from 'react'
 
-## Expanding the ESLint configuration
+function card({testchar, bio, year="not defined"}) {
+    console.log(testchar)
+    return (
+        <div className="flex flex-col items-center gap-6 p-7 md:flex-row md:gap-8 rounded-2xl">
+            <div>
+                <img className="size-48 shadow-xl rounded-md" alt="" src="https://tailwindcss.com/_next/static/media/cover.f75d494c.png" />
+            </div>
+            <div className="flex items-center md:items-start">
+                <span className="text-2xl font-medium">{testchar}</span>
+                <span className="font-medium text-sky-500">{bio}</span>
+                <span className="flex gap-2 font-medium text-gray-600 dark:text-gray-400">
+                    <span>{year}</span>
+                </span>
+            </div>
+        </div>
+    )
+}
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+export default card;
+```
