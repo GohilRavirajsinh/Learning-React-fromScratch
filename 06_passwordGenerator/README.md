@@ -1,16 +1,58 @@
-# React + Vite
+# What is new in **Project**
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## useCallback() Hook: For Optimised Code and store values into cache memory!, this example uses only
+```javascript
 
-Currently, two official plugins are available:
+const passwordGenerater = useCallback(() => {
+    let pass = "" // for add password that generate using 'str' and values
+    let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" // for generated password using this values
+    if (numberAllowed) str += "0123456789"
+    if (charAllowed) str += "/-*+=_!@#$%&"
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+    for (let i = 1; i <= length; i++) {
+      let char = Math.floor(Math.random() * str.length + 1)
+      pass += str.charAt(char)
+    }
+    setPassword(pass) // Read
 
-## React Compiler
+  }, [length, numberAllowed, charAllowed]) // koi bhi dependencies run hogi vo cache me store hogi jise code Optimised hoga
+  // this for loop is for Write password now for Read password
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```
 
-## Expanding the ESLint configuration
+## useEffect() Hook: Re Rendering When Dependencies are change! this example uses
+``` javascript 
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+useEffect(() => {
+    passwordGenerater()
+  }, [length, numberAllowed, charAllowed, passwordGenerater]) // koi bhi dependencies chhedega to vo ReRun ho jayega
+
+```
+
+## useRef() Hook: kisibhi chij ka reference lena hai tab ye hook ka use hota hai
+``` javascript
+
+const passwordRef = useRef(null) // for UI Effect Optimasion
+const copyPasswordToClipboard = useCallback(() => {
+    passwordRef.current?.select()               // select all clipboard
+    passwordRef.current?.setSelectionRange(0,8) // select 8 range of pass
+    window.navigator.clipboard.writeText(password)
+  }, [password]) // password Optimised
+
+// return UI Changes
+<div className='flex shadow rounded-lg overflow-hidden mb-4 bg-amber-50'>
+  <input
+    type="text"
+    value={password}
+    className="outline-none w-full py-1 px-3"
+    placeholder="Password"
+    readOnly
+    ref={passwordRef}
+  />
+  <button
+  className='outline-none bg-blue-700 text-white px-3 py-0.5 shrink-0'
+  onClick={copyPasswordToClipboard}
+  >Copy</button>
+</div>
+
+```
