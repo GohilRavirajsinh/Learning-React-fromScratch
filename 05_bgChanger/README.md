@@ -1,16 +1,27 @@
-# React + Vite
+# What is new in **Project**
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Onclick(() => ) with callback
+```javascript
 
-Currently, two official plugins are available:
+<button
+  onClick={() => setColor("pink")}
+  className="outline-none px-4 py-1 rounded text-black shadow-lg" style={{ backgroundColor: "pink" }}>pink</button>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```
 
-## React Compiler
+## setPassword(prev => {}) previous value using exact previous value many times we can use.
+```javascript 
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+<button
+  onClick={() => {
+    const colors = ["red", "blue", "green", "yellow"]; // add as many colors as you like
+    setPassword(prev => {
+      const currentIndex = colors.indexOf(prev);
+      return colors[(currentIndex + 1) % colors.length];
+    });
+}}
 
-## Expanding the ESLint configuration
+// Example
+// setNumberAllowed((prev) => !prev) // Reverse the previous value of setNumberAllowed, so yha True or False flip hota rahega 
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```
